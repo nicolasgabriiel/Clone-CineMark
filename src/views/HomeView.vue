@@ -1,9 +1,8 @@
 <template>
-  <div>
-    <h1>Lista de usuários:</h1>
-    <ul>
+  <div class="principal-container">
+    <!-- <ul>
       <li v-for="user in users" :key="user.id">{{ user.name }}</li>
-    </ul>
+    </ul> -->
   </div>
 </template>
 
@@ -32,6 +31,11 @@ export default defineComponent({
 
 </script>
 
-<style>
-
+<style scoped>
+.principal-container{
+  width: 100%;
+  min-height: 100vh;
+  height: auto;
+  background-color: black;
+}
 </style>
