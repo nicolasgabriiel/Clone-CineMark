@@ -3,33 +3,31 @@
   <div>
     <CarrosselDeImagens/>
   </div>
-    <!-- <ul>
-      <li v-for="user in users" :key="user.id">{{ user.name }}</li>
-    </ul> -->
+  <button @click="getData">Obter dados da API</button>
   </div>
 </template>
 
 <script lang="ts">
 import CarrosselDeImagens from '@/components/CarrosselDeImagens.vue';
-import { defineComponent, ref, onMounted } from 'vue';
+import { defineComponent} from 'vue';
+import axios from 'axios';
 
-interface User {
-  id: number;
-  name: string;
-}
 
 export default defineComponent({
-    name: "UserList",
-    setup() {
-        const users = ref<User[]>([]);
-        onMounted(async () => {
-            const response = await fetch("https://api.themoviedb.org/3/movie/4564?api_key=ea50df2fafdaa8c0f5c42dfbb1bd82f9");
-            users.value = await response.json();
-        });
-        console.log(users);
-        return { users };
-    },
-    components: { CarrosselDeImagens }
+  name: 'App',
+  async mounted(){
+      try {
+        const response = await axios.get('https://api.themoviedb.org/3/movie/76341?api_key=ea50df2fafdaa8c0f5c42dfbb1bd82f9&language=pt-BR');
+        console.log(response.data);
+      } catch (error) {
+        console.error(error);
+      }
+    
+  },
+  components:{
+    CarrosselDeImagens
+  }
+    
 });
 
 </script>
