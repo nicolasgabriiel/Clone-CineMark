@@ -22,3 +22,7 @@ npm run lint
 
 ### Customize configuration
 See [Configuration Reference](https://cli.vuejs.org/config/).
+
+
+chave api: 
+ea50df2fafdaa8c0f5c42dfbb1bd82f9

@@ -1,12 +1,35 @@
 <template>
-  <h1>Olá, esse é o projeto Cinemark</h1>
+  <div>
+    <h1>Lista de usuários:</h1>
+    <ul>
+      <li v-for="user in users" :key="user.id">{{ user.name }}</li>
+    </ul>
+  </div>
 </template>
 
 <script lang="ts">
-import { defineComponent } from 'vue';
+import { defineComponent, ref, onMounted } from 'vue';
+
+interface User {
+  id: number;
+  name: string;
+}
+
 export default defineComponent({
-    name:'HomeView',
-})
+  name: 'UserList',
+  setup() {
+    const users = ref<User[]>([]);
+
+    onMounted(async () => {
+      const response = await fetch('https://api.themoviedb.org/3/movie/4564?api_key=ea50df2fafdaa8c0f5c42dfbb1bd82f9');
+
+      users.value = await response.json();
+    });
+    console.log(users)
+    return { users };
+  },
+});
+
 </script>
 
 <style>
