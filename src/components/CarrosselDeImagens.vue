@@ -1,5 +1,5 @@
 <template>
-  <div class="container-carrossel">
+  <div class="container-carrossel" :style="{ backgroundImage: 'url(' + imageUrl + ')' }">
     <div class="controles-carrossel">
       <div class="container-botão">
         <button>comprar ingresso</button>
@@ -17,13 +17,29 @@
       </div>
     </div>
   </div>
+  <img src=""/>
 </template>
 
 <script lang="ts">
 import { defineComponent } from 'vue';
+import axios from 'axios';
 
 export default defineComponent({
   name: 'Carrossel-de-Imagens',
+  async mounted(){
+      try {
+        const response = await axios.get('https://api.themoviedb.org/3/movie/76341?api_key=ea50df2fafdaa8c0f5c42dfbb1bd82f9&language=pt-BR');
+        console.log(response.data);
+      } catch (error) {
+        console.error(error);
+      }
+    
+  },
+  data(){
+    return{
+      imageUrl:  'http://image.tmdb.org/t/p/original//tH64gzAHDFg7EFcgfkkZyHdGM5P.jpg'
+    }
+  }
 });
 </script>
 
@@ -31,8 +47,9 @@ export default defineComponent({
 .container-carrossel {
   width: 100%;
   height: 35vh;
-  background-color: aliceblue;
-  
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
 }
 .controles-carrossel{
   display: flex;

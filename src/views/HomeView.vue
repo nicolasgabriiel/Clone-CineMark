@@ -18,7 +18,7 @@ export default defineComponent({
   async mounted(){
       try {
         const response = await axios.get('https://api.themoviedb.org/3/movie/76341?api_key=ea50df2fafdaa8c0f5c42dfbb1bd82f9&language=pt-BR');
-        console.log(response.data);
+        // console.log(response.data);
       } catch (error) {
         console.error(error);
       }
