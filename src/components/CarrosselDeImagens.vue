@@ -37,7 +37,7 @@ export default defineComponent({
   },
   data(){
     return{
-      imageUrl:  'http://image.tmdb.org/t/p/original//tH64gzAHDFg7EFcgfkkZyHdGM5P.jpg'
+      imageUrl:  'http://image.tmdb.org/t/p/original/tH64gzAHDFg7EFcgfkkZyHdGM5P.jpg'
     }
   }
 });
