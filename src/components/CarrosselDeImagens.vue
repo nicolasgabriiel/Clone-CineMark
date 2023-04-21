@@ -1,5 +1,5 @@
 <template>
-  <div class="container-carrossel" :style="{ backgroundImage: 'url(' + imageUrl + ')' }">
+  <div class="container-carrossel" :style="{ backgroundImage: 'url(' + Filme1 + ')' }">
     <div class="controles-carrossel">
       <div class="container-botão">
         <button>comprar ingresso</button>
@@ -27,17 +27,25 @@ import axios from 'axios';
 export default defineComponent({
   name: 'Carrossel-de-Imagens',
   async mounted(){
-      try {
-        const response = await axios.get('https://api.themoviedb.org/3/movie/76341?api_key=ea50df2fafdaa8c0f5c42dfbb1bd82f9&language=pt-BR');
-        console.log(response.data);
+      try { 
+        const response = await axios.get(`https://api.themoviedb.org/3/search/movie?api_key=${this.key}&query=O+Exorcista+Do+Papa`);
+        console.log(response.data.results[0].backdrop_path);
+        this.urlFilme1 = response.data.results[0].backdrop_path;
+        this.Filme1 = this.buscadorDeImagem + this.urlFilme1
+        console.log(this.Filme1)
       } catch (error) {
         console.error(error);
+
       }
     
   },
   data(){
     return{
-      imageUrl:  'http://image.tmdb.org/t/p/original/tH64gzAHDFg7EFcgfkkZyHdGM5P.jpg'
+      imageUrl:  'http://image.tmdb.org/t/p/original/tH64gzAHDFg7EFcgfkkZyHdGM5P.jpg',
+      buscadorDeImagem: 'http://image.tmdb.org/t/p/original',
+      key: 'ea50df2fafdaa8c0f5c42dfbb1bd82f9',
+      urlFilme1: '',
+      Filme1:''
     }
   }
 });
