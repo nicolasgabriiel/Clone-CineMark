@@ -1,5 +1,5 @@
 <template>
-  <div class="container-carrossel" :style="{ backgroundImage: 'url(' + Filme1 + ')' }">
+  <div class="container-carrossel" :style="{ backgroundImage: 'url(' + Filmes[0] + ')' }">
     <div class="controles-carrossel">
       <div class="container-botão">
         <button>comprar ingresso</button>
@@ -29,10 +29,10 @@ export default defineComponent({
   async mounted(){
       try { 
         const response = await axios.get(`https://api.themoviedb.org/3/search/movie?api_key=${this.key}&query=O+Exorcista+Do+Papa`);
-        console.log(response.data.results[0].backdrop_path);
-        this.urlFilme1 = response.data.results[0].backdrop_path;
-        this.Filme1 = this.buscadorDeImagem + this.urlFilme1
-        console.log(this.Filme1)
+        console.log(response.data.results[0].poster_path);
+        this.urlFilmes[0] = response.data.results[0].poster_path;
+        this.Filmes[0] = this.buscadorDeImagem + this.urlFilmes[0];
+        console.log(this.Filmes[0]);
       } catch (error) {
         console.error(error);
 
@@ -41,11 +41,10 @@ export default defineComponent({
   },
   data(){
     return{
-      imageUrl:  'http://image.tmdb.org/t/p/original/tH64gzAHDFg7EFcgfkkZyHdGM5P.jpg',
       buscadorDeImagem: 'http://image.tmdb.org/t/p/original',
       key: 'ea50df2fafdaa8c0f5c42dfbb1bd82f9',
-      urlFilme1: '',
-      Filme1:''
+      urlFilmes: [''],
+      Filmes: ['']
     }
   }
 });
@@ -55,7 +54,7 @@ export default defineComponent({
 .container-carrossel {
   width: 100%;
   height: 35vh;
-  background-size: cover;
+  background-size: contain;
   background-position: center;
   background-repeat: no-repeat;
 }
