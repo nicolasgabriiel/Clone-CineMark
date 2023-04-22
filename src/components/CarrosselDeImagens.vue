@@ -63,9 +63,10 @@ export default defineComponent({
   font-family: 'Raleway', sans-serif;
   width: 100%;
   height: 35vh;
-  background-size: 60%;
+  background-size: contain;
   background-position: center;
   background-repeat: no-repeat;
+  background-color: rgb(8, 8, 8);
   display: flex;
   justify-content: center;
   align-items: flex-end;

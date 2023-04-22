@@ -2,12 +2,14 @@
   <div class="principal-container">
   <div>
     <CarrosselDeImagens/>
+    <FilmesEmCartaz/>
   </div>
   </div>
 </template>
 
 <script lang="ts">
 import CarrosselDeImagens from '@/components/CarrosselDeImagens.vue';
+import FilmesEmCartaz from '@/components/FilmesEmCartaz.vue';
 import { defineComponent} from 'vue';
 // import axios from 'axios';
 
@@ -24,8 +26,9 @@ export default defineComponent({
     
   // },
   components:{
-    CarrosselDeImagens
-  }
+    CarrosselDeImagens,
+    FilmesEmCartaz
+}
     
 });
 
