@@ -3,7 +3,7 @@
     <div class="controles-carrossel">
       <div class="container-botão">
         <button>comprar ingresso</button>
-      </div>
+      </div> <!--Container Botoes -->
       <div class="container-botoes">
         <ul class="lista-botoes"> 
           <li :class="{ 'filme-mostrado': botaoAtivo[0], }"><button @click="MudarFilme(0)"></button></li>
@@ -14,10 +14,9 @@
           <li :class="{ 'filme-mostrado': botaoAtivo[5], }"><button @click="MudarFilme(5)"></button></li>
           <li :class="{ 'filme-mostrado': botaoAtivo[6], }"><button @click="MudarFilme(6)"></button></li>
         </ul>
-      </div>
-    </div>
-  </div>
-  <img src=""/>
+       </div> <!--Container Botoes -->
+     </div> <!--Controles Carrossel -->
+   </div> <!--Container Carrossel -->
 </template>
 
 <script lang="ts">
@@ -66,35 +65,29 @@ export default defineComponent({
 
 <style scoped>
 .container-carrossel {
+  font-family: 'Raleway', sans-serif;
   width: 100%;
   height: 35vh;
   background-size: contain;
   background-position: center;
   background-repeat: no-repeat;
-}
-.controles-carrossel{
   display: flex;
-  flex-direction: column;
-  align-items: center;
-  padding-top: 55% ;
-
-}
-.lista-botoes{
-  display: flex ;
+  justify-content: center;
+  align-items: flex-end;
 }
 .container-botão button{
   background-color: red;
   border: none;
   font-size: 0.6em;
-  font-weight: bold;
+  font-weight: 800;
   text-transform: uppercase;
   padding: 7px 5px;
-  border-radius: 3px;
+  border-radius: 2px;
   color: white;
 }
 .container-botoes{
   display: flex;
-  justify-content: space-between;
+  justify-content: center;
 }
 .lista-botoes{
   display: flex;
@@ -108,11 +101,12 @@ li{
   border-radius: 4px;
   background-color: #cccccc;
   margin: 3px;
-  cursor: pointer;
+
 }
 li button{
   width: 100%;
   height: 100%;
+  display: block;
   background-color: transparent;
   border: none;
   color: inherit;
@@ -121,6 +115,7 @@ li button{
   font-family: inherit;
   padding: 0;
   margin: 0;
+  cursor: pointer;
 }
 .filme-mostrado{
   background-color: red !important; 
