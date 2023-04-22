@@ -13,7 +13,7 @@
           <li :class="{ 'filme-mostrado': botaoAtivo[4], }"><button @click="MudarFilme(4)"></button></li>
           <li :class="{ 'filme-mostrado': botaoAtivo[5], }"><button @click="MudarFilme(5)"></button></li>
           <li :class="{ 'filme-mostrado': botaoAtivo[6], }"><button @click="MudarFilme(6)"></button></li>
-        </ul>
+        </ul> <!-- Lista Botões -->
        </div> <!--Container Botoes -->
      </div> <!--Controles Carrossel -->
    </div> <!--Container Carrossel -->
@@ -27,21 +27,16 @@ export default defineComponent({
   name: 'Carrossel-de-Imagens',
   async mounted(){
       try { 
-        const listaIdsFilmes = []
+        const listaIdsFilmes = [502356,594767,603692,758323,804150,493529,1008005]
         for(let i = 0; i < 7; i++){
-        const response = await axios.get(`https://api.themoviedb.org/3/movie/50${i}?api_key=${this.key}`);
-        console.log(response.data)
+        const response = await axios.get(`https://api.themoviedb.org/3/movie/${listaIdsFilmes[i]}?api_key=${this.key}`);
         this.urlFilmes[i] = response.data.poster_path;
         this.Filmes[i] = this.buscadorDeImagem + this.urlFilmes[i];
       }
-      console.log(this.Filmes);
       this.FilmeNaTela = this.Filmes[0]
     } catch (error) {
         console.error(error);
-
       }
-    
-    
   },
   data(){
     return{
@@ -58,7 +53,6 @@ export default defineComponent({
       this.FilmeNaTela = this.Filmes[indice]
       this.botaoAtivo = [false,false,false,false,false,false,false]
       this.botaoAtivo[indice] = true
-      console.log(this.FilmeNaTela)
     }
   }
 });
