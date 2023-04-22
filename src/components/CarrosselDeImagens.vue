@@ -27,6 +27,7 @@ export default defineComponent({
   name: 'Carrossel-de-Imagens',
   async mounted(){
       try { 
+        const listaIdsFilmes = []
         for(let i = 0; i < 7; i++){
         const response = await axios.get(`https://api.themoviedb.org/3/movie/50${i}?api_key=${this.key}`);
         console.log(response.data)
@@ -68,7 +69,7 @@ export default defineComponent({
   font-family: 'Raleway', sans-serif;
   width: 100%;
   height: 35vh;
-  background-size: contain;
+  background-size: 60%;
   background-position: center;
   background-repeat: no-repeat;
   display: flex;
@@ -84,6 +85,11 @@ export default defineComponent({
   padding: 7px 5px;
   border-radius: 2px;
   color: white;
+  cursor: pointer;
+  transition: .5s;
+}
+.container-botão button:hover{
+  scale: 1.03;
 }
 .container-botoes{
   display: flex;
@@ -101,7 +107,9 @@ li{
   border-radius: 4px;
   background-color: #cccccc;
   margin: 3px;
-
+}
+li:hover{
+  background-color: #b9b7b7dd;
 }
 li button{
   width: 100%;
