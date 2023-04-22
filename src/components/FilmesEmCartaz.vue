@@ -1,7 +1,10 @@
 <template>
-    <div class="container-filmes" v-for="(Filme, index) in Filmes" :key="Filme"  >
-        <div class="imagem" :style="{ backgroundImage: 'url(' + Filme + ')' }"></div>
-  <h1 class="nome">{{ Nomes[index] }}</h1>
+    <h1>Filmes em Cartaz</h1>
+    <div class="box">
+        <div class="container-filmes" v-for=" (filme, index) in FilmesFiltrados" :key="filme.id"  :class="identificador[index]">
+            <div class="imagem" :style="{ backgroundImage: 'url(' + filme.url + ')' }"></div>
+            <h2 class="nome">{{ filme.nome }}</h2>
+        </div>
     </div>
 </template>
 
@@ -10,43 +13,61 @@ import { defineComponent } from 'vue';
 import axios from 'axios';
 export default defineComponent({
     name: 'Filmes-em-cartaz',
-    async mounted(){
-      try { 
-        const listaIdsFilmes = [502356,594767,603692,758323,804150,493529,1008005]
-        for(let i = 0; i < 7; i++){
-        const response = await axios.get(`https://api.themoviedb.org/3/movie/${listaIdsFilmes[i]}?api_key=${this.key}`);
-        this.urlFilmes[i] = response.data.poster_path;
-        this.Filmes[i] = this.buscadorDeImagem + this.urlFilmes[i];
-        this.Nomes[i] = response.data.original_title
-      }
-      console.log(this.Filmes)
-    } catch (error) {
-        console.error(error);
-      }
-  },
-  data(){
-    return{
-      buscadorDeImagem: 'http://image.tmdb.org/t/p/original',
-      key: 'ea50df2fafdaa8c0f5c42dfbb1bd82f9',
-      urlFilmes: [''],
-      Filmes: [''],
-      Nomes: ['']
-    }
-  },
+    async mounted() {
+        try {
+            const listaIdsFilmes = [502356, 594767, 603692, 758323, 804150, 493529, 1008005]
+            for (let i = 0; i < 7; i++) {
+                const response = await axios.get(`https://api.themoviedb.org/3/movie/${listaIdsFilmes[i]}?api_key=${this.key}`);
+                this.identificador[i] = i
+                this.filmes[i] = {
+                id: response.data.id,
+                nome: response.data.original_title,
+                url: this.buscadorDeImagem + response.data.poster_path,
+        };
+            }
+            console.log(this.filmes)
+        } catch (error) {
+            console.error(error);
+        }
+    },
+    data() {
+        return {
+            buscadorDeImagem: 'http://image.tmdb.org/t/p/original',
+            key: 'ea50df2fafdaa8c0f5c42dfbb1bd82f9',
+            filmes: [] as { id: number, nome: string, url: string }[],
+            mostrar: [true, false, false, false, false, false, false],
+            identificador: [] as number[]
+        }
+    },
+    computed: {
+    FilmesFiltrados() {
+      return this.filmes.filter((_, index) => this.mostrar[index]);
+    },
+}
 })
 </script>
 
 <style scoped>
-.container-filmes{
-
+.box{
+    display: flex;
+    flex-direction: row;
 }
-.imagem{
+.container-filmes {
+    display: flex;
+    flex-direction: column;
+}
+
+.imagem {
     height: 30vh;
     width: 46.3%;
     background-size: contain;
 }
-.nome{
+
+.nome {
     font-size: 20px;
-    color: white
+    color: black
+}
+.hide{
+    display: none !important;
 }
 </style>
